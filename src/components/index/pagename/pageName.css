@@ -1,0 +1,9 @@
+.pageName{
+    height: 61px ;
+    width: calc(100% - 300px);
+    display: block;
+    float: left;
+    padding-top: 10px;
+    font-size: xx-large;
+    text-align: center;
+}
