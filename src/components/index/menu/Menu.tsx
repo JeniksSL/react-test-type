@@ -1,35 +1,68 @@
-import React, { FC, useState } from 'react';
+import React, {FC, useRef, useState} from 'react';
 import './menu.css';
 import PageType from "../../../types/PageType";
-import PageName from "../pagename/PageName";
-import PageTypeProp from "../../../types/PageTypeProp";
-import Calls = jasmine.Calls;
-
-const Menu: FC<> = ({props:Function}) => {
+import {useDispatch} from "react-redux";
+import {setPage} from "../../../store/slices/pageSlice";
+import {MenuComponent} from "./MenuComponent";
 
 
+
+const Menu: FC = () => {
+
+    const dispatch = useDispatch();
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const menuRef = useRef<HTMLInputElement>(null)
+
+    const [childClassName, changeChild] = useState("menuA")
+
+    const animationEndHandler = (e: React.AnimationEvent<HTMLDivElement>
+    ) => {
+        if (e.animationName === 'open-menu') {
+            setIsOpen(true);
+            e.currentTarget.className=""
+        }
+
+        if (e.animationName === 'close-menu') {
+            setIsOpen(false);
+            e.currentTarget.className="noDisplay"
+        }
+    };
+    const changeMenuStatus = (pageType?:PageType)=> {
+        if (pageType&&isOpen) {
+            dispatch(setPage(pageType))
+        }
+        if (isOpen) {
+            if(menuRef.current){
+                menuRef.current.className = "menu-closed"
+                changeChild("menuA child-closed")
+            }
+        } else {
+            if(menuRef.current){
+                menuRef.current.className = "menu-open"
+                changeChild("menuA child-open")
+            }
+        }
+    }
 
 
     return (
         <div className="menuLeft" id="menuLeft">
-            <button className="menuButton" onClick={() => setIsOpen(!isOpen)} id="menuButton">MENU</button>
-            {isOpen && (
-                <div id="menu">
-                    <a className="menuA" href="/index" id="id_index" onClick={() => {setIsOpen(!isOpen);
-                        props(PageType.MAIN)} }>{PageType.MAIN}
-                    </a>
-                    <a className="menuA" href="/login" id="id_login" onClick={() => {setIsOpen(!isOpen);
-                        props(PageType.SIGN_IN)}}>{PageType.SIGN_IN}</a>
-                    <a className="menuA" href="/about" id="id_about" onClick={() => {setIsOpen(!isOpen);
-                        props(PageType.ABOUT) }}>{PageType.ABOUT}</a>
-                    <a className="menuA" href="/farmers" id="id_farmers" onClick={() => {setIsOpen(!isOpen);
-                        props(PageType.FOR_HYDROPONICS)} }>{PageType.FOR_FARMERS}</a>
-                    <a className="menuA" href="/hydroponics" id="id_hydroponics" onClick={() => {setIsOpen(!isOpen);
-                        props(PageType.FOR_HYDROPONICS)} }>{PageType.FOR_HYDROPONICS}</a>
-                </div>
-            )}
+            <button className="menuButton" onClick={() => changeMenuStatus()} id="menuButton">MENU</button>
+
+            <div
+                onAnimationEnd={(event ) => animationEndHandler(event)}
+                ref={menuRef}
+                className="noDisplay"
+            >
+                <MenuComponent className={childClassName} type={PageType.MAIN} changeMenuStatus={changeMenuStatus}></MenuComponent>
+                <MenuComponent className={childClassName} type={PageType.SIGN_IN} changeMenuStatus={changeMenuStatus}></MenuComponent>
+                <MenuComponent className={childClassName} type={PageType.ABOUT} changeMenuStatus={changeMenuStatus}></MenuComponent>
+                <MenuComponent className={childClassName} type={PageType.FOR_FARMERS} changeMenuStatus={changeMenuStatus}></MenuComponent>
+                <MenuComponent className={childClassName} type={PageType.FOR_HYDROPONICS} changeMenuStatus={changeMenuStatus}></MenuComponent>
+            </div>
+
 
         </div>
     );

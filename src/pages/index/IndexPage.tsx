@@ -1,25 +1,25 @@
 import React, {FC, useState} from 'react';
 import './indexPage.css';
-import Avatar from "../../components/index/avatar/Avatar";
-import PageName from "../../components/index/pagename/PageName";
-import Menu from "../../components/index/menu/Menu";
+import MenuRow from "../../components/index/header/MenuRow";
+import FarmersRows from "../../components/index/farmers/FarmersRows";
+import {useAppSelector} from "../../store/store";
 import PageType from "../../types/PageType";
-import PageTypeProp from "../../types/PageTypeProp";
+
 
 const IndexPage: FC = () => {
-    const [isFired, updatePage] = useState<PageTypeProp>({value: PageType.MAIN});
-    const update = (newValue:PageType)=>{updatePage({value:newValue})};
+
+    const selector = useAppSelector((state) => state.pageState)
 
     return (
 
-        <>
             <div className="index-page">
-                <Menu  apply={updatePage}/>
-                <PageName{...isFired}/>
-                <Avatar/>
+                <div className="container min-vw-100">
+                    <MenuRow/>
+                    {selector.currentPage===PageType.FOR_FARMERS&&(<FarmersRows/>)}
+                </div>
+
             </div>
 
-        </>
     );
 };
 export default IndexPage;

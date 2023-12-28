@@ -1,0 +1,199 @@
+@keyframes fadeIn {
+    from {opacity: 0; }
+    to {opacity: 1;}
+}
+@keyframes fadeCycle {
+    from {opacity: 1; }
+    50% {opacity: 0.5;}
+    to {opacity: 1;}
+}
+@keyframes fadeOut {
+    from {opacity: 1; }
+    to {opacity: 0;}
+}
+
+:root{
+    --effectsInOut: 1s
+}
+
+.fadeIn {
+    animation: fadeIn var(--effectsInOut);
+}
+
+.waiting{
+    animation: fadeCycle 1s;
+}
+.fadeOut{
+    animation: fadeOut var(--effectsInOut);
+}
+
+
+.listRes{
+    float: right;
+    overflow:scroll;
+}
+.listFooter,.listHeader{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    width:450px;
+    display: inline-block;
+    transition: opacity 0.5s;
+}
+
+.listFooter{
+    height: 15vh;
+}
+
+h1, h2, h3{
+    font-family: "Arial Black", serif;
+    color: #323539;
+    text-align: center;
+}
+
+.noEdit{
+    pointer-events: none !important;
+}
+
+.div_name{
+    display:inline-block;
+    overflow: hidden;
+    float: left;
+    width: 150px;
+    position:relative;
+    height: 25px;
+}
+.div_type{
+    display: inline-block;
+    overflow: hidden;
+    float: left;
+    width: 50px;
+    position:relative;
+    height: 25px;
+}
+
+.input_type{
+    display: inline-block;
+    overflow: hidden;
+    float: left;
+    width: 50px;
+    position:relative;
+    height: 25px;
+    border: none;
+    text-align: left;
+}
+.input_name{
+    display:inline-block;
+    overflow: hidden;
+    float: left;
+    width: 150px;
+    position:relative;
+    height: 25px;
+    background-color: rgba(255,255,255,0.5);
+    border: none;
+    text-align: left;
+}
+.input_rate{
+    display:inline-block;
+    overflow: hidden;
+    float: left;
+    width: 70px;
+    position:relative;
+    height: 25px;
+    background-color: rgba(255,255,255,0.5) !important;
+    border: none;
+}
+.input_rate::placeholder{
+    color: black;
+    opacity: 1;
+}
+
+button{
+    overflow: visible;
+}
+.disabled{
+    opacity: 0.3;
+    pointer-events: none;
+}
+.buttonAdd {
+    display: inline-block;
+    overflow: hidden;
+    float: left;
+    width: 40px;
+    position:relative;
+    height: 25px;
+    background: transparent;
+    border: none;
+}
+.buttonRemove, .buttonProperties {
+    display: inline-block;
+    overflow: hidden;
+    width: 40px;
+    position:relative;
+    height: 25px;
+    background: transparent;
+    float: right;
+    border: none;
+}
+.buttonHeader{
+    display: inline-block;
+    overflow: hidden;
+    width: 50px;
+    position:relative;
+    height: 25px;
+    background: transparent;
+    float: right;
+    border: none;
+}
+
+.fullName{
+    display:inline-block;
+    overflow: hidden;
+    float: left;
+    width: 420px;
+    position:relative;
+    height: 25px;
+    background-color: rgba(255,255,255,0.5);
+    border: none;
+    margin: 2px;
+}
+.buttonSave, .buttonDelete {
+    display: inline-block;
+    overflow: hidden;
+    float: left;
+    width: 210px;
+    position:relative;
+    height: 25px;
+    background: transparent;
+    border: none;
+}
+
+
+
+
+.buttonRemove:hover, .buttonProperties:hover, .buttonAdd:hover, button:hover{
+    background-color:  rgba(0,0,0,0.5);
+    transition: background-color 0.5s;
+}
+
+.liLeft {
+    float: left;
+    border-style:solid;
+    border-width:1px;
+    width:300px;
+    display: inline-block;
+    transition: opacity 0.5s;
+    border-radius: 5px;
+    outline: 1px solid blueviolet;
+}
+
+.liRight{
+    border-style:solid;
+    border-width:1px;
+    width:440px;
+    display: inline-block;
+    transition: opacity 0.5s;
+    border-radius: 5px;
+    outline: 1px solid blueviolet;
+}
+

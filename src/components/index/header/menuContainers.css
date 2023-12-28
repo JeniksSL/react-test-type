@@ -1,0 +1,21 @@
+
+
+
+.menu_top{
+    width: 100vw;
+    margin-top: 10px;
+    float: left;
+    display: block;
+    background: transparent;
+    padding-left:0px;
+}
+.menu_bottom{
+    width: 100vw;
+    height: 67px;
+    float: left;
+    display: block;
+    background-color:rgb(240,240,240);
+    border-top: 3px solid grey;
+    border-bottom: 3px solid grey;
+    z-index: 10;
+}

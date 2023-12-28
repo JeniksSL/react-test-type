@@ -1,16 +1,18 @@
 import React, { FC, useState } from 'react';
 import './pageName.css';
-import PageType from "../../../types/PageType";
-import PageTypeProp from "../../../types/PageTypeProp";
+
+import { useAppSelector} from "../../../store/store";
 
 
-const PageName: FC<PageTypeProp> = (props) => {
 
-    //const [currentPage, changePage] = useState<string>(PageType.MAIN);
+const PageName: FC = () => {
+
+    const selector = useAppSelector((state) => state.pageState)
+
 
     return (
         <div className="pageName">
-            <p>{props.value}</p>
+            <p>{selector.currentPage}</p>
         </div>
     );
 };

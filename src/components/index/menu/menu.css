@@ -1,3 +1,46 @@
+@keyframes open-menu {
+    from {opacity: 0; }
+    to {opacity: 1;}
+}
+
+@keyframes close-menu {
+    from {opacity: 1; }
+    to {opacity: 0;}
+}
+
+@keyframes show-button {
+    from {height: 0px;
+        font-size: 0px;}
+    to {height: 40px;
+        font-size: 15px;}
+}
+
+@keyframes close-button {
+    from {height: 40px;
+        font-size: 15px;}
+    to {height: 0px;
+        font-size: 0px; }
+}
+
+.menu-open{
+    animation: open-menu 0.5s;
+}
+.menu-closed{
+    animation: close-menu 0.5s;
+}
+
+.child-open{
+    animation: show-button 0.5s;
+}
+.child-closed{
+    animation: close-button 0.5s;
+}
+
+
+.noDisplay{
+    display: none;
+}
+
 .menuLeft{
     border: none;
     font-size: x-large;
