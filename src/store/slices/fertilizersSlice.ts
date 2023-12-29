@@ -29,7 +29,7 @@ const fertilizersSlice = createSlice({
         removeFromRequired: (state, action: PayloadAction<number>) => {
             state.requiredProducts.delete(action.payload)
         },
-        editPrice: (state, action: PayloadAction<IProduct>) => {
+        editPrice: (state, action: PayloadAction<{id:number, price:number}>) => {
             let required = state.allProducts.get(action.payload.id)
             if (required) required.price = action.payload.price
         },
@@ -55,7 +55,15 @@ export function useGetRequiredProducts(){
     let data:IProduct [] = [];
     ids.forEach((id)=>{
         let iSub= selector.allProducts.get(id)
-        if (iSub) data.push(iSub)
+        if (iSub) data.push(iSub);
+    })
+    return data;
+}
+export function useGetAllProducts(){
+    let selector = useAppSelector((state) => state.fertilizersState)
+    let data:IProduct [] = [];
+    selector.allProducts.forEach((v,k)=>{
+        if (v) data.push(v);
     })
     return data;
 }

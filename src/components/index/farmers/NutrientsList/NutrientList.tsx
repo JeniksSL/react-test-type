@@ -4,13 +4,12 @@ import {useFindAllQuery} from "../../../../api/substanceApi/substanceApi";
 import NutrientListElement from "./NutrientListElement";
 import {ISubstance} from "../../../../types/ISubstance";
 import {useDispatch} from "react-redux";
-import {putAll} from "../../../../store/slices/substanceSlice";
+import {putAllSub, useGetAllNutrients} from "../../../../store/slices/substanceSlice";
 
 const NutrientList: FC=()=>{
 
     const dispatch = useDispatch();
-    const { data:substances } = useFindAllQuery()
-    if (substances) dispatch(putAll(substances))
+    const substances = useGetAllNutrients()
 
     const substancesToRender = substances?.map((al:ISubstance) => (
         <NutrientListElement {...al}/>

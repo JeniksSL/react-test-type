@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import '../farmersPage.css'
 import {ISubstance} from "../../../../types/ISubstance";
-import {useGetRequiredSubstances, putAll, removeFromRequired} from "../../../../store/slices/substanceSlice";
+import {useGetRequiredSubstances, putAllSub, removeFromRequired} from "../../../../store/slices/substanceSlice";
 import RequiredNutrientElement from "./RequiredNutrientElement";
 
 

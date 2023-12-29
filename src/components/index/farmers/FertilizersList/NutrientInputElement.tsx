@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {ISubstance} from "../../../../types/ISubstance";
+import {ISubstanceCompact} from "../../../../types/ISubstanceCompact";
 
 export interface NutrientElementType {
     id: number;
@@ -7,14 +7,22 @@ export interface NutrientElementType {
     color: string;
     content: number
 }
-type NutrientElementProps = NutrientElementType&{isOpen:boolean}
+type NutrientElementAdditionalProps = {
+    changeContent(newContent:ISubstanceCompact): void
+    isOpen:boolean;
+}
+type NutrientElementProps = NutrientElementType&NutrientElementAdditionalProps
 
 
 const NutrientInputElement: FC<NutrientElementProps>=(props:NutrientElementProps)=>{
     const generateSpanTitle = props.name.split("").map((el:string) => (
-        isNaN(Number.parseFloat(el))?el:"&lt;sub&gt;".concat(el).concat("&lt;sub/&gt;")
+        isNaN(Number.parseFloat(el))?el:"<sub>".concat(el).concat("<sub/>")
     )).join("");
 
+    const changeContentHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let newContent = Number.parseFloat(e.currentTarget.value);
+        if (!isNaN(newContent)) props.changeContent({id:props.id, content:newContent});
+    }
     return(
             props.isOpen?<input
                 className="input_type"
@@ -23,6 +31,7 @@ const NutrientInputElement: FC<NutrientElementProps>=(props:NutrientElementProps
                 style={{
                     backgroundColor: (props.color)? props.color:"#FFFFFF"
                 }}
+                onChange={changeContentHandle}
             />:<div
                 className="input_type"
                 style={{

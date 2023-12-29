@@ -20,7 +20,7 @@ const substanceSlice = createSlice({
     initialState,
     name: 'substanceSlice',
     reducers: {
-        putAll: (state, action: PayloadAction<ISubstance[]>) => {
+        putAllSub: (state, action: PayloadAction<ISubstance[]>) => {
             action.payload.forEach((el) => state.allSubstances.set(el.id, el))
         },
         putIntoRequired: (state, action: PayloadAction<number>) => {
@@ -30,9 +30,9 @@ const substanceSlice = createSlice({
         removeFromRequired: (state, action: PayloadAction<number>) => {
             state.requiredSubstances.delete(action.payload)
         },
-        editRate: (state, action: PayloadAction<ISubstance>) => {
+        editRate: (state, action: PayloadAction<ISubstanceCompact>) => {
             let required = state.allSubstances.get(action.payload.id)
-            if (required) required.rate = action.payload.rate
+            if (required) required.rate = action.payload.content
         }
     }
 })
@@ -40,7 +40,7 @@ const substanceSlice = createSlice({
 export default substanceSlice.reducer;
 
 export const {
-    putAll,
+    putAllSub,
     putIntoRequired,
     removeFromRequired,
     editRate
@@ -69,5 +69,11 @@ export function useGetAllNutrientInputs(availableSubstances:ISubstanceCompact[])
         data.push({id:element.id, content:subContent, name:element.name, color:element.color}
            )
     })
+    return data;
+}
+export function useGetAllNutrients(){
+    let selector = useAppSelector((state) => state.substanceState)
+    let data:ISubstance [] = [];
+    selector.allSubstances.forEach((v, k)=>{if(v) data.push(v)})
     return data;
 }
