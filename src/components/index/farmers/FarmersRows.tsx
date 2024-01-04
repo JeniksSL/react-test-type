@@ -10,16 +10,33 @@ import AvailableFertilizersList from "./FertilizersList/AvailableFertilizersList
 import FertilizersListHeader from "./FertilizersList/FertilizersListHeader";
 import AvailableFertilizersHeader from "./AvailableFertilizers/AvailableFertilizersHeader";
 import UsingFertilizersList from "./AvailableFertilizers/UsingFertilizersList";
+
+
 import {useResolveCaseMutation} from "../../../store/api/calculationApi";
+
 import {useCreateCalculationRequest} from "../../../store/slices/calculationSlice";
-import {CalculationRequestDto} from "../../../types/requests/CalculationRequestDto";
-import ResultComponent from "./ResultComponent";
+import {CalculationResponseDto} from "../../../types/responces/CalculationResponseDto";
+import ResultTable from "../result/ResultTable";
 
 
 
 const FarmersRows:FC = ()=>{
+    const [result, setResult] = useState<CalculationResponseDto|undefined>(undefined)
+    const req= useCreateCalculationRequest()
+    const [resp, {}] = useResolveCaseMutation()
     const [rate,  changeRate] = useState<boolean>(false)
+    const printRes = async () => {
 
+        try {
+            const returned = await resp(req).unwrap();
+            console.log(returned)
+            setResult(returned)
+        } catch (error) {
+            // you can handle errors here if you want to
+        }
+
+
+    }
 
 
 
@@ -29,8 +46,8 @@ const FarmersRows:FC = ()=>{
                 <div className="col-12 col-lg-5 col-xl-5 col-xxl-5">
                     <h3 >Result</h3>
                     <div id="listRes" className="listRes">
-                        <button onClick={()=>{changeRate(!rate)}}></button>
-                        {rate&&<ResultComponent/>}
+                        <button onClick={printRes}></button>
+                        {result?<ResultTable {...result}/>:null}
                     </div>
                 </div>
                 <div className="col-12 col-lg-3 col-xl-3 col-xxl-3">

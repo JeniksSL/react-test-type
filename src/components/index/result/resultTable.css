@@ -1,0 +1,14 @@
+.resultTh {
+    overflow: hidden;
+    width: 150px;
+    height: 27px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+.resultTd {
+    overflow: hidden;
+    width: 70px;
+    height: 27px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
