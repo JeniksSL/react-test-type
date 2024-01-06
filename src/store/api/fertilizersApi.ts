@@ -6,12 +6,6 @@ import {createApi} from "@reduxjs/toolkit/query/react";
 import {IProduct} from "../../types/IProduct";
 import {ProductSearchRequest} from "../../types/requests/ProductSearchRequest";
 
-
-
-
-
-
-
 export const fertilizersApi = createApi({
     reducerPath: 'fertilizersApi',
     baseQuery: basicInterceptor,

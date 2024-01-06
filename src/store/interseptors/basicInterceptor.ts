@@ -11,13 +11,13 @@ const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
   baseUrl,
   credentials: 'include',
-  prepareHeaders: (headers) => {
+ /* prepareHeaders: (headers) => {
     const token = LocalStorage.getAccessToken()
     if (token) {
       //headers.set('authorization', `Bearer ${token}`)
     }
     return headers
-  },
+  },*/
 })
 
 const basicInterceptor: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
